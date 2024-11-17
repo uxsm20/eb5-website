@@ -55,8 +55,8 @@ const Contact = () => {
                 <div>
                   <h3 className="text-lg font-semibold">Offices</h3>
                   <div className="space-y-2">
-                    <p className="text-gray-600">HSR Layout<br />Bangalore, Karnataka</p>
-                    <p className="text-gray-600">Vasna Road<br />Vadodara, Gujarat</p>
+                    <p className="text-gray-600">HSR Layout, Bangalore, Karnataka</p>
+                    <p className="text-gray-600">Vasna Road, Vadodara, Gujarat</p>
                   </div>
                 </div>
               </div>
