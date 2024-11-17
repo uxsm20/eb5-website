@@ -45,9 +45,15 @@ const Footer = () => {
 
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
-            <ul className="space-y-2">
-              <li className="text-gray-400">123 Business Center</li>
-              <li className="text-gray-400">New York, NY 10001</li>
+            <ul className="space-y-4">
+              <li>
+                <p className="text-gray-400">HSR Layout</p>
+                <p className="text-gray-400">Bangalore, Karnataka</p>
+              </li>
+              <li>
+                <p className="text-gray-400">Vasna Road</p>
+                <p className="text-gray-400">Vadodara, Gujarat</p>
+              </li>
               <li className="text-gray-400">+91 88847 13789</li>
               <li className="text-gray-400">eb5visaexpert@gmail.com</li>
             </ul>
