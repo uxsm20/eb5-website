@@ -12,9 +12,9 @@ const Navbar = () => {
             <img 
               src="/logo.png" 
               alt="EB5 Visa Expert" 
-              className="h-12 w-auto max-w-[200px] object-contain"
+              className="h-8 sm:h-12 w-auto max-w-[120px] sm:max-w-[200px] object-contain"
             />
-            <h1 className="text-xl font-bold tracking-tight text-gray-900 hidden sm:block">
+            <h1 className="text-sm sm:text-xl font-bold tracking-tight text-gray-900">
               EB5 <span className="text-gray-900">Visa Expert</span>
             </h1>
           </div>
