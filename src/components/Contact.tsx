@@ -34,27 +34,30 @@ const Contact = () => {
             </p>
 
             <div className="space-y-6">
-              <div className="flex items-center">
-                <Phone className="h-6 w-6 text-primary-600 mr-4" />
+              <div className="flex items-start">
+                <Phone className="h-6 w-6 text-primary-600 mr-4 mt-1" />
                 <div>
                   <h3 className="text-lg font-semibold">Phone</h3>
-                  <p className="text-gray-600">+1 (555) 123-4567</p>
+                  <p className="text-gray-600">+91 88847 13789</p>
                 </div>
               </div>
 
-              <div className="flex items-center">
-                <Mail className="h-6 w-6 text-primary-600 mr-4" />
+              <div className="flex items-start">
+                <Mail className="h-6 w-6 text-primary-600 mr-4 mt-1" />
                 <div>
                   <h3 className="text-lg font-semibold">Email</h3>
-                  <p className="text-gray-600">info@eb5investments.com</p>
+                  <p className="text-gray-600">eb5visaexpert@gmail.com</p>
                 </div>
               </div>
 
-              <div className="flex items-center">
-                <MapPin className="h-6 w-6 text-primary-600 mr-4" />
+              <div className="flex items-start">
+                <MapPin className="h-6 w-6 text-primary-600 mr-4 mt-1" />
                 <div>
-                  <h3 className="text-lg font-semibold">Office</h3>
-                  <p className="text-gray-600">123 Business Center, New York, NY 10001</p>
+                  <h3 className="text-lg font-semibold">Offices</h3>
+                  <div className="space-y-2">
+                    <p className="text-gray-600">HSR Layout<br />Bangalore, Karnataka</p>
+                    <p className="text-gray-600">Vasna Road<br />Vadodara, Gujarat</p>
+                  </div>
                 </div>
               </div>
             </div>
