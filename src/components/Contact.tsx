@@ -240,7 +240,7 @@ const Contact = () => {
                   )}
                 </div>
 
-                <div className="flex justify-center mb-4">
+                <div className="mb-4">
                   <ReCAPTCHA
                     ref={recaptchaRef}
                     sitekey="6LcHiIIqAAAAAG0-wZ18AvEzqyuJzGsuf1LEJOZq"
