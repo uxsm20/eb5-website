@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useForm as useFormspree } from '@formspree/react';
 import toast, { Toaster } from 'react-hot-toast';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 // Form validation schema
 const contactSchema = z.object({
@@ -21,8 +22,10 @@ const Contact = () => {
   // Formspree hook
   const [formspreeState, sendToFormspree] = useFormspree('xbljkjnn');
   
-  // State for submission success
+  // State for submission success and reCAPTCHA
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [captchaValue, setCaptchaValue] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   // React Hook Form
   const {
@@ -35,13 +38,38 @@ const Contact = () => {
   });
 
   const onSubmit = async (data: ContactFormData) => {
+    if (!captchaValue) {
+      toast.error('Please complete the reCAPTCHA verification');
+      return;
+    }
+
     try {
-      await sendToFormspree(data);
+      await sendToFormspree({
+        ...data,
+        'g-recaptcha-response': captchaValue,
+      });
       toast.success('Message sent successfully!');
       setIsSubmitted(true);
       reset();
+      // Reset reCAPTCHA
+      setCaptchaValue(null);
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
     } catch (error) {
       toast.error('Failed to send message. Please try again.');
+    }
+  };
+
+  const handleCaptchaChange = (value: string | null) => {
+    setCaptchaValue(value);
+  };
+
+  const handleSendAnother = () => {
+    setIsSubmitted(false);
+    setCaptchaValue(null);
+    if (recaptchaRef.current) {
+      recaptchaRef.current.reset();
     }
   };
 
@@ -120,7 +148,7 @@ const Contact = () => {
                   We'll get back to you as soon as possible.
                 </p>
                 <button
-                  onClick={() => setIsSubmitted(false)}
+                  onClick={handleSendAnother}
                   className="text-primary-600 hover:text-primary-700 font-medium"
                 >
                   Send another message
@@ -212,11 +240,19 @@ const Contact = () => {
                   )}
                 </div>
 
+                <div className="flex justify-center mb-4">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey="6LcHiIIqAAAAAG0-wZ18AvEzqyuJzGsuf1LEJOZq"
+                    onChange={handleCaptchaChange}
+                  />
+                </div>
+
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !captchaValue}
                   className={`w-full bg-primary-600 text-white py-3 px-6 rounded-md transition ${
-                    isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:bg-primary-700'
+                    isSubmitting || !captchaValue ? 'opacity-75 cursor-not-allowed' : 'hover:bg-primary-700'
                   }`}
                 >
                   {isSubmitting ? (
