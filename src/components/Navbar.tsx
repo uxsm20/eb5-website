@@ -1,8 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -30,7 +33,21 @@ const Navbar = () => {
     }
   }, [isOpen]);
 
-  const handleMenuItemClick = () => {
+  const handleSectionClick = (sectionId: string) => {
+    const handleScroll = () => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    if (location.pathname !== '/') {
+      navigate('/', { replace: true });
+      // Wait for navigation to complete before scrolling
+      setTimeout(handleScroll, 100);
+    } else {
+      handleScroll();
+    }
     setIsOpen(false);
   };
 
@@ -40,22 +57,46 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
             <div className="flex items-center space-x-3">
-              <img 
-                src="/logo.png" 
-                alt="EB5 Visa Expert" 
-                className="h-8 sm:h-12 w-auto max-w-[120px] sm:max-w-[200px] object-contain"
-              />
-              <h1 className="text-sm sm:text-xl font-bold tracking-tight text-gray-900">
-                EB5 <span className="text-gray-900">Visa Expert</span>
-              </h1>
+              <Link to="/" className="flex items-center space-x-3">
+                <img 
+                  src="/logo.png" 
+                  alt="EB5 Visa Expert" 
+                  className="h-8 sm:h-12 w-auto max-w-[120px] sm:max-w-[200px] object-contain"
+                />
+                <h1 className="text-sm sm:text-xl font-bold tracking-tight text-gray-900">
+                  EB5 <span className="text-gray-900">Visa Expert</span>
+                </h1>
+              </Link>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#home" className="nav-link text-gray-700">Home</a>
-              <a href="#process" className="nav-link text-gray-700">Process</a>
-              <a href="#projects" className="nav-link text-gray-700">Projects</a>
-              <a href="#requirements" className="nav-link text-gray-700">Requirements</a>
-              <a href="#contact" className="button-hover bg-primary-600 text-white px-4 py-2 rounded-md">Contact Us</a>
+              <button 
+                onClick={() => handleSectionClick('process')} 
+                className="nav-link text-gray-700 hover:text-primary-600"
+              >
+                Process
+              </button>
+              <button 
+                onClick={() => handleSectionClick('projects')} 
+                className="nav-link text-gray-700 hover:text-primary-600"
+              >
+                Projects
+              </button>
+              <button 
+                onClick={() => handleSectionClick('requirements')} 
+                className="nav-link text-gray-700 hover:text-primary-600"
+              >
+                Requirements
+              </button>
+              <Link to="/blog" className="nav-link text-gray-700 hover:text-primary-600">
+                Blog
+              </Link>
+              <button 
+                onClick={() => handleSectionClick('contact')} 
+                className="button-hover bg-primary-600 text-white px-4 py-2 rounded-md"
+              >
+                Contact Us
+              </button>
             </div>
           </div>
         </div>
@@ -82,41 +123,37 @@ const Navbar = () => {
       >
         <div className="flex flex-col justify-center items-center min-h-screen px-4">
           <div className="flex flex-col items-center space-y-12">
-            <a 
-              href="#home" 
+            <button 
+              onClick={() => handleSectionClick('process')} 
               className="text-gray-900 text-2xl font-semibold"
-              onClick={handleMenuItemClick}
-            >
-              Home
-            </a>
-            <a 
-              href="#process" 
-              className="text-gray-900 text-2xl font-semibold"
-              onClick={handleMenuItemClick}
             >
               Process
-            </a>
-            <a 
-              href="#projects" 
+            </button>
+            <button 
+              onClick={() => handleSectionClick('projects')} 
               className="text-gray-900 text-2xl font-semibold"
-              onClick={handleMenuItemClick}
             >
               Projects
-            </a>
-            <a 
-              href="#requirements" 
+            </button>
+            <button 
+              onClick={() => handleSectionClick('requirements')} 
               className="text-gray-900 text-2xl font-semibold"
-              onClick={handleMenuItemClick}
             >
               Requirements
-            </a>
-            <a 
-              href="#contact" 
+            </button>
+            <Link 
+              to="/blog" 
+              className="text-gray-900 text-2xl font-semibold"
+              onClick={() => setIsOpen(false)}
+            >
+              Blog
+            </Link>
+            <button 
+              onClick={() => handleSectionClick('contact')} 
               className="button-hover bg-primary-600 text-white px-8 py-4 rounded-md text-xl font-semibold mt-8"
-              onClick={handleMenuItemClick}
             >
               Contact Us
-            </a>
+            </button>
           </div>
         </div>
       </div>
