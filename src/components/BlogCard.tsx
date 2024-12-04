@@ -7,6 +7,8 @@ interface BlogCardProps {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
+  const displayTags = blog.tags.slice(0, 3); // Limit to first 3 tags
+
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
       <Link to={`/blog/${blog.slug}`}>
@@ -18,7 +20,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
       </Link>
       <div className="p-6">
         <div className="flex flex-wrap items-center gap-2 mb-4">
-          {blog.tags.map((tag, index) => (
+          {displayTags.map((tag, index) => (
             <span 
               key={index}
               className="text-xs font-medium text-primary-600 bg-primary-50 px-2.5 py-0.5 rounded-full"
