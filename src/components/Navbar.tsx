@@ -122,35 +122,35 @@ const Navbar = () => {
         className={`mobile-menu-overlay ${isOpen ? 'open' : 'closed'}`}
       >
         <div className="flex flex-col justify-center items-center min-h-screen px-4">
-          <div className="flex flex-col items-center space-y-12">
+          <div className="flex flex-col items-center space-y-8">
             <button 
               onClick={() => handleSectionClick('process')} 
-              className="text-gray-900 text-2xl font-semibold"
+              className="text-gray-700 text-xl hover:text-primary-600 transition-colors"
             >
               Process
             </button>
             <button 
               onClick={() => handleSectionClick('projects')} 
-              className="text-gray-900 text-2xl font-semibold"
+              className="text-gray-700 text-xl hover:text-primary-600 transition-colors"
             >
               Projects
             </button>
             <button 
               onClick={() => handleSectionClick('requirements')} 
-              className="text-gray-900 text-2xl font-semibold"
+              className="text-gray-700 text-xl hover:text-primary-600 transition-colors"
             >
               Requirements
             </button>
             <Link 
               to="/blog" 
-              className="text-gray-900 text-2xl font-semibold"
+              className="text-gray-700 text-xl hover:text-primary-600 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Blog
             </Link>
             <button 
               onClick={() => handleSectionClick('contact')} 
-              className="button-hover bg-primary-600 text-white px-8 py-4 rounded-md text-xl font-semibold mt-8"
+              className="group inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg text-white bg-primary-500 hover:bg-primary-600 transition-all duration-200 shadow-lg shadow-primary-500/25 mt-4"
             >
               Contact Us
             </button>
