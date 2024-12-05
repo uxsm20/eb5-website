@@ -243,7 +243,11 @@ const Contact = () => {
                 <div className="mb-4">
                   <ReCAPTCHA
                     ref={recaptchaRef}
-                    sitekey="6LcHiIIqAAAAAG0-wZ18AvEzqyuJzGsuf1LEJOZq"
+                    sitekey={
+                      window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                        ? '6LcHiIIqAAAAAG0-wZ18AvEzqyuJzGsuf1LEJOZq'  // Development key
+                        : '6LcHiIIqAAAAAG0-wZ18AvEzqyuJzGsuf1LEJOZq'  // Production key - Replace this with a new key configured for your Vercel domain
+                    }
                     onChange={handleCaptchaChange}
                   />
                 </div>
